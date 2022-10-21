@@ -11,7 +11,7 @@ WORKDIR "/src/."
 RUN dotnet build "HelloWorldAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "HelloWorldAPI.csproj" -c Release -r linux-musl-x64 --not-self-contained -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "HelloWorldAPI.csproj" -c Release -r linux-musl-x64 --no-self-contained -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
