@@ -17,5 +17,3 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "HelloWorldAPI.dll"]
-
-HEALTHCHECK --interval=10s --timeout=1s --start-period=30s CMD curl -f http://localhost/live || exit 1
