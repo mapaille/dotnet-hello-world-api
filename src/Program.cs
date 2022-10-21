@@ -9,6 +9,8 @@ builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
+var hostname = app.Configuration.GetValue<string>("HOSTNAME");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -18,10 +20,6 @@ if (app.Environment.IsDevelopment())
 app.MapHealthChecks("/ready");
 app.MapHealthChecks("/live", new HealthCheckOptions { Predicate = _ => false });
 
-app.MapGet("/hello-world", async (HttpResponse response) =>
-{
-    response.ContentType = MediaTypeNames.Text.Plain;
-    await response.WriteAsync($"Hello World from {response.HttpContext.Request.Host.Value}");
-}).WithName("HelloWorld");
+app.MapGet("/hello-world", () => $"Hello World from {hostname}").WithName("HelloWorld");
 
 app.Run();
