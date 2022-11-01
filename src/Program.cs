@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using System.Net.Mime;
 
 var builder = WebApplication.CreateBuilder(args);
 
